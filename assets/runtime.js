@@ -201,6 +201,7 @@
         bc.postMessage({ type: 'go', idx: n });
       }
     }
+    window.go = go; window.goNext = function(){go(idx+1)}; window.goPrev = function(){go(idx-1)};
 
     /* ===== listen for remote navigation / theme changes ===== */
     if (bc) {
