@@ -203,5 +203,28 @@
 
 </div>
 <script src="./assets/runtime.js"></script>
+<style>
+.mobile-hint{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;font-size:13px;padding:8px 20px;border-radius:999px;pointer-events:none;z-index:9999;font-family:sans-serif;opacity:.8;display:none}
+@media(max-width:768px){.mobile-hint{display:block}}
+</style>
+<div class="mobile-hint">← 左右滑动翻页 →</div>
+<script>
+// 移动端滑动翻页
+(function(){
+  var startX=0, startY=0;
+  document.addEventListener('touchstart', function(e){
+    startX=e.touches[0].clientX;
+    startY=e.touches[0].clientY;
+  },{passive:true});
+  document.addEventListener('touchend', function(e){
+    var dx=e.changedTouches[0].clientX-startX;
+    var dy=e.changedTouches[0].clientY-startY;
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)){
+      if(dx<0) Runtime.nextSlide();
+      else Runtime.prevSlide();
+    }
+  },{passive:true});
+})();
+</script>
 </body>
 </html>
